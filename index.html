@@ -1,17 +1,33 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="da">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CineMaxx Movies</title>
-    <link rel="stylesheet" href="styles.css">
-   
-</head>
-<body>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
     <h1>CineMaxx Movies</h1>
     <h2><a href="favorit-movies.html">Favorit Movies</a></h2>
+
+    <form>
+      <label for="category-select">Vælg kategori:</label>
+      <select id="category-select">
+        <option value="Alle">Alle</option>
+        <option value="science-fiction">Science-Fiction</option>
+        <option value="drama">Drama</option>
+        <option value="horror">Horror</option>
+        <option value="comedy">Comedy</option>
+        <option value="action">Action</option>
+      </select>
+
+      <label for="gsearch">Søg</label>
+      <input type="search" id="gsearch" name="gsearch" />
+      <input type="submit" value="søg" />
+    </form>
+
     <section id="movies-container"></section>
 
     <script src="js/movies-script.js"></script>
-</body>
+  </body>
 </html>

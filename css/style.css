@@ -1,56 +1,112 @@
-figure img {
-  width: 100%;
-  height: 100%;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+/* Her styler jeg hele siden, så den får en rolig baggrund og en læsbar skrifttype */
 body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  font-family: Arial, sans-serif;
+  background-color: #f8f8f8;
+  color: #222;
+  padding: 20px;
 }
 
-h1 {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-/* Opgave 13 – Layout med CSS Flexbox */
-#movies-container {
+/* Her styler jeg containeren, som indeholder alle udstillingerne */
+#movies-container,
+#favorites-container {
   display: flex;
   flex-wrap: wrap;
+  gap: 20px;
   justify-content: center;
-  align-items: stretch;
-  gap: 24px;
+  gap: 1.5rem;
 }
 
-article {
+#movies-container article {
   background-color: white;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   border-radius: 10px;
   padding: 20px;
-  width: 250px;
+  width: 330px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  position: relative;
 }
 
-article h2 {
+/* Her styler jeg overskriften på udstillingsnavnet */
+#movies-container h2 {
   margin-top: 0;
+  font-size: 1.4rem;
+  color: #2c3e50;
 }
 
-article p {
-  margin: 6px 0;
+/* Her styler jeg placeringen */
+#movies-container h3 {
+  font-size: 1rem;
+  font-weight: normal;
+  color: #666;
+  margin-bottom: 10px;
 }
 
-figure {
-  margin: 20px 0 0 0;
+/* Her styler jeg brødteksten */
+#movies-container p {
+  line-height: 1.5;
+  margin-bottom: 10px;
 }
 
-img {
+/* Her styler jeg datoerne lidt diskret */
+#movies-container time {
+  font-weight: bold;
+  color: #8b5e3c;
+}
+
+/* Her laver jeg en lille effekt, når musen holdes over kortet */
+#movies-container article:hover {
+  transform: translateY(-3px);
+  transition: 0.2s;
+}
+
+/* Her styler jeg sidens hovedoverskrift */
+h1 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 30px;
+}
+
+#periode,
+#placering,
+#beskrivelse,
+#start-date,
+#end-date {
+  font-weight: 900;
+}
+
+#favorites-container article {
+  width: 330px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 1rem;
+  position: relative;
+  background-color: lightblue;
+}
+
+#favorites-container img {
   width: 100%;
   height: auto;
-  border-radius: 8px;
+  display: block;
 }
 
-figcaption {
-  margin-top: 10px;
-  text-align: left;
-  font-weight: bold;
+.favorite-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+h2,
+h3,
+p {
+  margin-bottom: 3%;
 }
