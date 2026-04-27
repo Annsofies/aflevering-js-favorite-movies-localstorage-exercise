@@ -98,24 +98,27 @@ const movies = [
 
 const favoritesContainer = document.querySelector("#favorites-container");
 
-// Nu opretter jeg en funktion, der viser de udstillinger, som der er  tilføjet til favoritterne.
+// Hent favorit-id'er fra localStorage.
+// Eksempel på data: [2, 5, 8]
 let favoritIds = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
 
+// Filtrér den store filmliste ned til kun de film, hvis id er i favorit-listen.
 const favoriteMovies = movies.filter((item) => {
   return favoritIds.includes(item.id);
 });
 
 function displayMovies(movieList) {
+  // Hvis ingen favoritfilm er valgt endnu, vis en venlig besked.
   if (movieList.length === 0) {
     favoritesContainer.innerHTML =
       "<p>Du har endu ikke valgt nogen favoritfilm  </p>";
     return;
-  } // her slutter if sætning
+  }
 
-  // .map og filter laver nye lister baserert på en gammel liste, og indsætter nye værdier
+  // map() laver hvert filmobjekt om til en HTML-streng.
+  // join("") samler alle strenge til én samlet HTML-blok.
   const html = movieList
     .map((item) => {
-      // Her skal jeg indsætte noget js kode
       return `
         <article>
             <h2>${item.title}</h2>
@@ -136,7 +139,9 @@ function displayMovies(movieList) {
     })
     .join("");
 
+  // Indsæt de færdige filmkort i siden.
   favoritesContainer.innerHTML = html;
-} // her slutter funktionen
+}
 
+// Vis favoritfilm med det samme når siden loader.
 displayMovies(favoriteMovies);

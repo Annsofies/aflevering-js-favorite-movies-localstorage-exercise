@@ -100,78 +100,57 @@ const selectedCategory = document.querySelector("#category-select");
 const searchInput = document.querySelector("#gsearch");
 const form = document.querySelector("form");
 
-function displayMovies(movieList) {
-  // Her opbygger vi et nyt array med map() basererert på vores movie-array (liste)
-  const html = movieList
-    .map((movie) => {
-      return `
-    <article>
-        <h2>${movie.title}</h2>
-        <ul>
-            <li>Genre: ${movie.genre}</li>
-            <li>År: ${movie.year}</li>
-            <li>Varighed: ${movie.duration}</li>
-        </ul>
-
-        <figure>
-            <a href="${movie.url}" target="_blank" rel="noopener noreferrer">
-                <img src="${movie.img}" alt= "${movie.title}">
-            </a>
-            <figcaption>${movie.title}</figcaption>
-        </figure>
-   </article>`;
-    })
-    .join(""); // Her samler man det hele med join("") til en samlet html-streng
-
-  moviesContainer.innerHTML = html;
-}
+// Vi gemmer kun id'er i localStorage (fx [1, 4, 9]), ikke hele film-objekter.
+// Hvis der ikke er gemt noget endnu, bruger vi et tomt array.
+let favoriteIds = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
 
 function filterMovies() {
+  // Henter værdier fra UI:
+  // kategori fra dropdown + søgetekst fra input.
   const selectedValue = selectedCategory.value;
   const searchTerm = searchInput.value.toLowerCase().trim();
 
+  // Start med alle film og filtrér dem trinvis.
   let filteredMovies = movies;
 
+  // Filtrér på genre hvis brugeren har valgt andet end "Alle".
   if (selectedValue !== "Alle") {
     filteredMovies = filteredMovies.filter((movie) => {
       return movie.genre === selectedValue;
     });
   }
 
+  // Filtrér på titel hvis brugeren har skrevet noget i søgefeltet.
+  // toLowerCase() gør søgningen case-insensitive.
   if (searchTerm !== "") {
     filteredMovies = filteredMovies.filter((movie) => {
       return movie.title.toLowerCase().includes(searchTerm);
     });
   }
 
+  // Vis resultatet i DOM.
   displayMovies(filteredMovies);
 }
 
-// Sætter en addeventlistener på variablen searchInput (søgefeltet), som lytter på ændringer i søgefeltet
+// Kør filtrering mens brugeren skriver.
 searchInput.addEventListener("input", filterMovies);
 
+// Forhindrer at siden reloades ved submit, og filtrerer i stedet i JavaScript.
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   filterMovies();
 });
 
-// Ændre på funktionen
+// Kør filtrering når kategori ændres.
 selectedCategory.addEventListener("change", filterMovies);
 
-// Her kalder jeg funktionen og sender hele movie-arrayet med ind som argument.
-displayMovies(movies);
-
-//  Sætter ind så favorit stjerner vises
-
-const movieContainer = document.querySelector("#movie-container");
-
-let favoriteIds = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
-
+// Hjælpefunktion: returnerer true hvis id findes i favorit-listen.
 function isFavorite(id) {
   return favoriteIds.includes(id);
 }
 
 function displayMovies(movieList) {
+  // Bygger HTML for alle filmkort og indsætter i #movies-container.
   const html = movieList
     .map((movie) => {
       let star;
@@ -184,6 +163,9 @@ function displayMovies(movieList) {
 
       return `
         <article>
+        <button class="favorite-btn" data-id="${movie.id}" aria-label="Tilføj eller fjern favorit">
+          ${star}
+        </button>
         <h2>${movie.title}</h2>
         <ul>
             <li>Genre: ${movie.genre}</li>
@@ -204,10 +186,12 @@ function displayMovies(movieList) {
 
   moviesContainer.innerHTML = html;
 
+  // Knapperne oprettes dynamisk i innerHTML, så vi henter dem efter render.
   const favoriteButtons = document.querySelectorAll(".favorite-btn");
 
   favoriteButtons.forEach((button) => {
     button.addEventListener("click", () => {
+      // dataset.id er string => konverteres til Number før vi bruger den.
       const movieId = Number(button.dataset.id);
       toggleFavorite(movieId);
     });
@@ -215,6 +199,8 @@ function displayMovies(movieList) {
 }
 
 function toggleFavorite(id) {
+  // Hvis film allerede er favorit: fjern den.
+  // Ellers: tilføj den.
   if (favoriteIds.includes(id)) {
     favoriteIds = favoriteIds.filter((favoriteId) => {
       return favoriteId !== id;
@@ -223,9 +209,12 @@ function toggleFavorite(id) {
     favoriteIds.push(id);
   }
 
+  // Gem den opdaterede favorit-liste permanent i browseren.
   localStorage.setItem("favoriteMovies", JSON.stringify(favoriteIds));
 
+  // Re-render så stjernerne opdateres med det samme.
   displayMovies(movies);
 }
 
+// Første render ved sideindlæsning.
 displayMovies(movies);
