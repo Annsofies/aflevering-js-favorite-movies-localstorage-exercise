@@ -185,7 +185,6 @@ function displayMovies(movieList) {
       return `
         <article>
         <h2>${movie.title}</h2>
-        <button class="favorite-btn" data-id="${movie.id}">${star}</button>
         <ul>
             <li>Genre: ${movie.genre}</li>
             <li>År: ${movie.year}</li>
@@ -203,7 +202,7 @@ function displayMovies(movieList) {
     })
     .join("");
 
-moviesContainer.innerHTML = html;
+  moviesContainer.innerHTML = html;
 
   const favoriteButtons = document.querySelectorAll(".favorite-btn");
 

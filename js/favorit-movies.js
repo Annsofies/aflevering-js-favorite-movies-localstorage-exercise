@@ -117,21 +117,21 @@ function displayMovies(movieList) {
     .map((item) => {
       // Her skal jeg indsætte noget js kode
       return `
-            <article>
-        <h2>${item.title}</h2>
-        <ul>
-            <li>Genre: ${item.genre}</li>
-            <li>År: ${item.year}</li>
-            <li>Varighed: ${item.duration}</li>
-        </ul>
+        <article>
+            <h2>${item.title}</h2>
+            <ul>
+                <li>Genre: ${item.genre}</li>
+                <li>År: ${item.year}</li>
+                <li>Varighed: ${item.duration}</li>
+            </ul>
 
-        <figure>
-            <a href="${item.url}" target="_blank" rel="noopener noreferrer">
-                <img src="${item.img}" alt= "${item.title}">
-            </a>
-            <figcaption>${item.title}</figcaption>
-        </figure>
-   </article>
+            <figure>
+                <a href="${item.url}" target="_blank" rel="noopener noreferrer">
+                    <img src="${item.img}" alt= "${item.title}">
+                </a>
+                <figcaption>${item.title}</figcaption>
+            </figure>
+        </article>
             `;
     })
     .join("");
