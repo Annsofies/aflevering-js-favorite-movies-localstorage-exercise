@@ -1,5 +1,7 @@
-# 🎬 JavaScript DOM Favorites #5  
-## Favoritfilm med `localStorage` og separat favoritside  
+# 🎬 JavaScript DOM Favorites #5
+
+## Favoritfilm med `localStorage` og separat favoritside
+
 ### CineMaxx Movies – Favorite Movies
 
 ## Opgavebeskrivelse

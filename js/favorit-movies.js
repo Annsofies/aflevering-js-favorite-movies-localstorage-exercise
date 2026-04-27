@@ -118,16 +118,20 @@ function displayMovies(movieList) {
       // Her skal jeg indsætte noget js kode
       return `
             <article>
-                <button class="favorite-btn" data-id="${item.id}" aria-label="Vælg favorit">
-                    ${star}
-                </button>
-                <h2>${item.udstillingsnavn}</h2>
-                <h3><span id="periode">Periode: </span> ${item.periode}</h3>
-                <h3><span id="placering">Placering: </span> ${item.placering}</h3>
-                <p><span id="beskrivelse">Beskrivelse: </span> ${item.beskrivelse}</p>
-                <p>Exhibition Start date <time datetime="${item.startdato}">${item.startdato}</time></p>
-                <p>Exhibition Slut date <time datetime="${item.slutdato}">${item.slutdato}</time></p>
-            </article>
+        <h2>${movie.title}</h2>
+        <ul>
+            <li>Genre: ${movie.genre}</li>
+            <li>År: ${movie.year}</li>
+            <li>Varighed: ${movie.duration}</li>
+        </ul>
+
+        <figure>
+            <a href="${movie.url}" target="_blank" rel="noopener noreferrer">
+                <img src="${movie.img}" alt= "${movie.title}">
+            </a>
+            <figcaption>${movie.title}</figcaption>
+        </figure>
+   </article>
             `;
     })
     .join("");

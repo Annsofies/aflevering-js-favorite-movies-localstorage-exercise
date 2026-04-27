@@ -161,9 +161,6 @@ selectedCategory.addEventListener("change", filterMovies);
 // Her kalder jeg funktionen og sender hele movie-arrayet med ind som argument.
 displayMovies(movies);
 
-
-
-
 //  Sætter ind så favorit stjerner vises
 
 const movieContainer = document.querySelector("#movie-container");
@@ -200,19 +197,19 @@ function displayMovies(movieList) {
             </a>
             <figcaption>${movie.title}</figcaption>
         </figure>
-   </article>`;
+   </article>
         `;
     })
     .join("");
 
-  exhibitionContainer.innerHTML = html;
+moviesContainer.innerHTML = html;
 
   const favoriteButtons = document.querySelectorAll(".favorite-btn");
 
   favoriteButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      const exhibitionId = Number(button.dataset.id);
-      toggleFavorite(exhibitionId);
+      const movieId = Number(button.dataset.id);
+      toggleFavorite(movieId);
     });
   });
 }
@@ -226,9 +223,9 @@ function toggleFavorite(id) {
     favoriteIds.push(id);
   }
 
-  localStorage.setItem("favoriteExhibitions", JSON.stringify(favoriteIds));
+  localStorage.setItem("favoriteMovies", JSON.stringify(favoriteIds));
 
-  displayExhibitions(exhibitions);
+  displayMovies(movies);
 }
 
-displayExhibitions(exhibitions);
+displayMovies(movies);
