@@ -102,12 +102,10 @@ const favoritesContainer = document.querySelector("#favorites-container");
 // Eksempel på data: [2, 5, 8]
 let favoritIds = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
 
-function getFavoriteMovies() {
-  // Filtrér den store filmliste ned til kun de film, hvis id er i favorit-listen.
-  return movies.filter((item) => {
-    return favoritIds.includes(item.id);
-  });
-}
+// Filtrér den store filmliste ned til kun de film, hvis id er i favorit-listen.
+const favoriteMovies = movies.filter((item) => {
+  return favoritIds.includes(item.id);
+});
 
 function displayMovies(movieList) {
   // Hvis ingen favoritfilm er valgt endnu, vis en venlig besked.
@@ -123,9 +121,6 @@ function displayMovies(movieList) {
     .map((item) => {
       return `
         <article>
-            <button class="favorite-btn" data-id="${item.id}" aria-label="Fjern favorit">
-                ★
-            </button>
             <h2>${item.title}</h2>
             <ul>
                 <li>Genre: ${item.genre}</li>
@@ -146,26 +141,7 @@ function displayMovies(movieList) {
 
   // Indsæt de færdige filmkort i siden.
   favoritesContainer.innerHTML = html;
-
-  const favoriteButtons = document.querySelectorAll(".favorite-btn");
-
-  favoriteButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const movieId = Number(button.dataset.id);
-      toggleFavorite(movieId);
-    });
-  });
-}
-
-function toggleFavorite(id) {
-  // På favoritsiden fjerner klik på stjerne filmen fra favoritter.
-  favoritIds = favoritIds.filter((favoriteId) => {
-    return favoriteId !== id;
-  });
-
-  localStorage.setItem("favoriteMovies", JSON.stringify(favoritIds));
-  displayMovies(getFavoriteMovies());
 }
 
 // Vis favoritfilm med det samme når siden loader.
-displayMovies(getFavoriteMovies());
+displayMovies(favoriteMovies);

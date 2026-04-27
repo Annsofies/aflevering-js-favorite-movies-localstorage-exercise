@@ -24,7 +24,6 @@ article {
   border-radius: 10px;
   padding: 20px;
   width: 250px;
-  position: relative;
 }
 
 article h2 {
@@ -81,4 +80,9 @@ figcaption {
   top: 10px;
   right: 10px;
   z-index: 2;
+  line-height: 1;
+}
+
+article:has(.favorite-btn) {
+  position: relative;
 }

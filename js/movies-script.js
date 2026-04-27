@@ -212,8 +212,8 @@ function toggleFavorite(id) {
   // Gem den opdaterede favorit-liste permanent i browseren.
   localStorage.setItem("favoriteMovies", JSON.stringify(favoriteIds));
 
-  // Re-render med aktuelt filter/søgning, så visningen ikke hopper tilbage.
-  filterMovies();
+  // Re-render så stjernerne opdateres med det samme.
+  displayMovies(movies);
 }
 
 // Første render ved sideindlæsning.
