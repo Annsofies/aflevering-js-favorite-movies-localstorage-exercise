@@ -160,3 +160,75 @@ selectedCategory.addEventListener("change", filterMovies);
 
 // Her kalder jeg funktionen og sender hele movie-arrayet med ind som argument.
 displayMovies(movies);
+
+
+
+
+//  Sætter ind så favorit stjerner vises
+
+const movieContainer = document.querySelector("#movie-container");
+
+let favoriteIds = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
+
+function isFavorite(id) {
+  return favoriteIds.includes(id);
+}
+
+function displayMovies(movieList) {
+  const html = movieList
+    .map((movie) => {
+      let star;
+
+      if (isFavorite(movie.id)) {
+        star = "★";
+      } else {
+        star = "☆";
+      }
+
+      return `
+        <article>
+        <h2>${movie.title}</h2>
+        <ul>
+            <li>Genre: ${movie.genre}</li>
+            <li>År: ${movie.year}</li>
+            <li>Varighed: ${movie.duration}</li>
+        </ul>
+
+        <figure>
+            <a href="${movie.url}" target="_blank" rel="noopener noreferrer">
+                <img src="${movie.img}" alt= "${movie.title}">
+            </a>
+            <figcaption>${movie.title}</figcaption>
+        </figure>
+   </article>`;
+        `;
+    })
+    .join("");
+
+  exhibitionContainer.innerHTML = html;
+
+  const favoriteButtons = document.querySelectorAll(".favorite-btn");
+
+  favoriteButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const exhibitionId = Number(button.dataset.id);
+      toggleFavorite(exhibitionId);
+    });
+  });
+}
+
+function toggleFavorite(id) {
+  if (favoriteIds.includes(id)) {
+    favoriteIds = favoriteIds.filter((favoriteId) => {
+      return favoriteId !== id;
+    });
+  } else {
+    favoriteIds.push(id);
+  }
+
+  localStorage.setItem("favoriteExhibitions", JSON.stringify(favoriteIds));
+
+  displayExhibitions(exhibitions);
+}
+
+displayExhibitions(exhibitions);

@@ -108,7 +108,7 @@ const favoriteMovies = movies.filter((item) => {
 function displayMovies(movieList) {
   if (movieList.length === 0) {
     favoritesContainer.innerHTML =
-      "<p>Du har endu ikke valgt nogen favoritfilm </p>";
+      "<p>Du har endu ikke valgt nogen favoritfilm  </p>";
     return;
   } // her slutter if sætning
 
@@ -117,15 +117,18 @@ function displayMovies(movieList) {
     .map((item) => {
       // Her skal jeg indsætte noget js kode
       return `
-        <article>
-            <h2>${item.title}</h2>
-            <h3><span id="periode">År: </span> ${item.year}</h3>
-            <h3><span id="placering">Genre: </span> ${item.genre}</h3>
-            <p><span id="beskrivelse">Varighed: </span> ${item.duration}</p>
-            <p>Film URL: <a href="${item.url}" target="_blank">${item.url}</a></p>
-        </article>
-        `;
-      // her slutter .map loopet
+            <article>
+                <button class="favorite-btn" data-id="${item.id}" aria-label="Vælg favorit">
+                    ${star}
+                </button>
+                <h2>${item.udstillingsnavn}</h2>
+                <h3><span id="periode">Periode: </span> ${item.periode}</h3>
+                <h3><span id="placering">Placering: </span> ${item.placering}</h3>
+                <p><span id="beskrivelse">Beskrivelse: </span> ${item.beskrivelse}</p>
+                <p>Exhibition Start date <time datetime="${item.startdato}">${item.startdato}</time></p>
+                <p>Exhibition Slut date <time datetime="${item.slutdato}">${item.slutdato}</time></p>
+            </article>
+            `;
     })
     .join("");
 
@@ -133,9 +136,3 @@ function displayMovies(movieList) {
 } // her slutter funktionen
 
 displayMovies(favoriteMovies);
-
-// Hvis man skal kunne tilføje eller fjerne favoritter på favoritsiden skal der tilføjes under: <article> og før <h2>
-//
-// <button class="favorite-btn" data-id="${item.id}" aria-label="Vælg favorit">
-// ${star}
-// </button>;
