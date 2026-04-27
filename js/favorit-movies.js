@@ -118,18 +118,18 @@ function displayMovies(movieList) {
       // Her skal jeg indsætte noget js kode
       return `
             <article>
-        <h2>${movie.title}</h2>
+        <h2>${item.title}</h2>
         <ul>
-            <li>Genre: ${movie.genre}</li>
-            <li>År: ${movie.year}</li>
-            <li>Varighed: ${movie.duration}</li>
+            <li>Genre: ${item.genre}</li>
+            <li>År: ${item.year}</li>
+            <li>Varighed: ${item.duration}</li>
         </ul>
 
         <figure>
-            <a href="${movie.url}" target="_blank" rel="noopener noreferrer">
-                <img src="${movie.img}" alt= "${movie.title}">
+            <a href="${item.url}" target="_blank" rel="noopener noreferrer">
+                <img src="${item.img}" alt= "${item.title}">
             </a>
-            <figcaption>${movie.title}</figcaption>
+            <figcaption>${item.title}</figcaption>
         </figure>
    </article>
             `;

@@ -1,10 +1,3 @@
-
-
-figure img {
-  width: 100%;
-  height: 100%;
-}
-
 body {
   display: flex;
   flex-direction: column;
@@ -58,7 +51,7 @@ figcaption {
 }
 
 /* Her laver jeg en lille effekt, når musen holdes over kortet */
-#movie-container article:hover {
+#movies-container article:hover {
   transform: translateY(-3px);
   transition: 0.2s;
 }
